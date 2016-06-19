@@ -1,7 +1,7 @@
 # Hotel
 Hotel Reservations Spring MVC Web Application
 
-Requirements:
+# Requirements:
 - Hotel has Location
 - Location has Address (eg. City, Street, Zip-code)
 - Hotel has many rooms
@@ -10,7 +10,7 @@ Requirements:
 - Room can be booked for period of time: from - to
 - Room can have windows exposed to one of the following directions: NORTH, SOUTH, WEST, EAST
 
-To do:
+# To do:
 1. Create system described above using best practices and principles of Object-Oriented programming
 2. It should be possible to:
     - Access system using web browser
@@ -22,7 +22,7 @@ To do:
     - Publish code on github
     - It should be possible to build and run project using single maven command
 
-Installing and running notes:
+# Installing and running notes:
 1. Set up MySQL database connection options in src\main\resources\META-INF\config\jdbc.properties
 2. Create and initialize database by running script from files\hotel.sql
 3. Database schema with fields and connections is in files\hotel.pdf
