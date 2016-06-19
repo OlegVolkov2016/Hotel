@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page"
+     xmlns:c="http://java.sun.com/jsp/jstl/core"
+     xmlns:spring="http://www.springframework.org/tags"
+     xmlns:form="http://www.springframework.org/tags/form"
+     xmlns:sec="http://www.springframework.org/security/tags"
+     version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+
+    <spring:message code="room_info_title" var="roomInfoTitle"/>
+    <spring:message code="room_number_label" var="roomNumberLabel"/>
+    <spring:message code="room_type_label" var="roomTypeLabel"/>
+    <spring:message code="room_direction_label" var="roomDirectionLabel"/>
+    <spring:message code="room_edit_label" var="roomEditLabel"/>
+    <spring:message code="room_delete_label" var="bookDeleteLabel"/>
+    <spring:message code="room_add_label" var="roomAddLabel"/>
+    <spring:message code="confirmation_label" var="confirmationLabel"/>
+    <spring:url var="roomEditUrl" value="?edit" />
+    <spring:url var="roomDeleteUrl" value="?delete" />
+    <spring:url var="roomAddUrl" value="?add" />
+    <spring:url value="/" var="homeUrl"/>
+
+    <div id="room_info">
+
+        <h2>${roomInfoTitle}</h2>
+
+        <c:if test="${not empty message}">
+            <div id="message" class="${message.type}">${message.message}</div>
+        </c:if>
+
+        <table>
+            <tr>
+                <td>${roomNumberLabel}</td>
+                <td>${room.number}</td>
+            </tr>
+            <tr>
+                <td>${roomTypeLabel}</td>
+                <td>${room.type}</td>
+            </tr>
+            <tr>
+                <td>${roomDirectionLabel}</td>
+                <td>${room.direction}</td>
+            </tr>
+        </table>
+        <form:form method="get" action="${homeUrl}${room.id}${roomDeleteUrl}"
+                   onsubmit="return confirm('${confirmationLabel}') ? true : false;">
+            <sec:authorize access="hasRole('ROLE_ADMIN')">
+            <a href="${homeUrl}${room.id}${roomEditUrl}">
+                <input name="edit" type="button" value="${roomEditLabel}"/>
+            </a>
+            <input name="delete" type="submit" value="${bookDeleteLabel}"/>
+            </sec:authorize>
+            <sec:authorize access="isAuthenticated()">
+                <a href="${homeUrl}${room.id}${roomAddUrl}">
+                    <input name="edit" type="button" value="${roomAddLabel}"/>
+                </a>
+            </sec:authorize>
+        </form:form>
+    </div>
+</div>

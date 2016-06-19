@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+<div xmlns:jsp="http://java.sun.com/JSP/Page"
+     xmlns:c="http://java.sun.com/jsp/jstl/core"
+     xmlns:spring="http://www.springframework.org/tags"
+     xmlns:form="http://www.springframework.org/tags/form" xmlns:sec="http://www.springframework.org/security/tags"
+     version="2.0">
+
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+
+    <spring:message code="registration_title" var="registrationTitle"/>
+    <spring:message code="user_info_title" var="userInfoTitle"/>
+    <spring:message code="login_label" var="loginLabel"/>
+    <spring:message code="password_label" var="passwordLabel"/>
+    <spring:message code="confirm_label" var="confirmLabel"/>
+    <spring:message code="user_firstname_label" var="userFirstNameLabel"/>
+    <spring:message code="user_lastname_label" var="userLastNameLabel"/>
+    <spring:message code="user_role_label" var="userRoleLabel"/>
+    <spring:message code="save_label" var="saveLabel"/>
+    <spring:message code="reset_label" var="resetLabel"/>
+
+    <spring:eval expression="guest.id == null ? registrationTitle : userInfoTitle"
+                 var="userFormTitle"/>
+
+    <div id="user_info">
+        <h2>${userFormTitle}</h2>
+
+        <form:form modelAttribute="guest" id="userInfoForm" method="post">
+
+            <c:if test="${not empty message}">
+                <div id="message" class="${message.type}">${message.message}</div>
+            </c:if>
+
+            <form:label path="login">
+                ${loginLabel}*
+            </form:label>
+            <form:input path="login" />
+            <form:errors path="login" cssClass="error" />
+            <p/>
+
+            <form:label path="password">
+                ${passwordLabel}*
+            </form:label>
+            <form:input type="password" path="password" />
+            <form:errors path="password" cssClass="error" />
+            <p/>
+
+            <form:label path="confirm">
+                ${confirmLabel}*
+            </form:label>
+            <form:input type="password" path="confirm" />
+            <form:errors path="confirm" cssClass="error" />
+            <p/>
+
+            <form:label path="firstName">
+                ${userFirstNameLabel}*
+            </form:label>
+            <form:input path="firstName" />
+            <form:errors path="firstName" cssClass="error" />
+            <p/>
+
+            <form:label path="lastName">
+                ${userLastNameLabel}*
+            </form:label>
+            <form:input path="lastName" />
+            <form:errors path="lastName" cssClass="error" />
+            <p/>
+
+            <!--<sec:authorize access="hasRole('ROLE_ADMIN')">-->
+                <!--<form:label path="role">-->
+                    <!--${userRoleLabel}*-->
+                <!--</form:label>-->
+                <!--<form:select path="role" items="${roles}"/>-->
+                <!--<form:errors path="role" cssClass="error" />-->
+                <!--<p/>-->
+            <!--</sec:authorize>-->
+
+            <form:hidden path="id" />
+            <form:hidden path="version" />
+            <form:hidden path="role" />
+
+            <a>
+                <input name="submit" type="submit" value="${saveLabel}"/>
+            </a>
+            <a>
+                <input name="reset" type="reset" value="${resetLabel}"/>
+            </a>
+        </form:form>
+    </div>
+</div>

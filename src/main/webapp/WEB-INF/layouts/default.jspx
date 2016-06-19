@@ -1,0 +1,57 @@
+<html xmlns:jsp="http://java.sun.com/JSP/Page"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+      xmlns:tiles="http://tiles.apache.org/tags-tiles"
+      xmlns:spring="http://www.springframework.org/tags">
+
+<jsp:output doctype-root-element="HTML" doctype-system="about:legacy-compat" />
+
+<jsp:directive.page contentType="text/html;charset=UTF-8" />
+<jsp:directive.page pageEncoding="UTF-8" />
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=8" />
+
+    <spring:theme code="styleSheet" var="application_css" />
+    <spring:url value="/${application_css}" var="application_css_url" />
+    <link rel="stylesheet" type="text/css" media="screen" href="${application_css_url}" />
+
+    <!-- jQuery и jQuery UI -->
+    <spring:url value="/resources/scripts/jquery-3.0.0.js"
+                var="jquery_url" />
+    <spring:url value="/resources/scripts/jquery-ui-1.11.4.custom.min.js"
+                var="jquery_ui_url" />
+    <spring:url
+            value="/resources/styles/jquery-ui-1.11.4.custom.css"
+            var="jquery_ui_theme_css" />
+    <link rel="stylesheet" type="text/css" media="screen"
+          href="${jquery_ui_theme_css}" />
+    <script src="${jquery_url}" type="text/javascript"><jsp:text/>
+    </script>
+    <script src="${jquery_ui_url}" type="text/javascript"><jsp:text/>
+    </script>
+
+    <!-- Get the user locale from the page context (it was set by Spring MVC's locale resolver) -->
+    <c:set var="userLocale">
+        <c:set var="plocale">${pageContext.response.locale}</c:set>
+        <c:out value="${fn:replace(plocale, '_', '-')}" default="en" />
+    </c:set>
+
+    <spring:message code="application_name" var="application_name" htmlEscape="false"/>
+    <title><spring:message code="welcome_to" arguments="${hotel.name}"/></title>
+
+</head>
+
+<body class="tundra spring">
+<div id="headerWrapper">
+    <tiles:insertAttribute name="header" ignore="true" />
+</div>
+<div id="wrapper">
+    <tiles:insertAttribute name="menu" ignore="true" />
+    <div id="main">
+        <tiles:insertAttribute name="body"/>
+    </div>
+</div>
+</body>
+</html>

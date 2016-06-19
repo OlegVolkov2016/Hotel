@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+    <definition extends="default" name="list">
+        <put-attribute name="body" value="/WEB-INF/views/list.jspx" />
+    </definition>
+    <definition extends="default" name="show">
+        <put-attribute name="body" value="/WEB-INF/views/show.jspx" />
+    </definition>
+    <definition extends="default" name="edit">
+        <put-attribute name="body" value="/WEB-INF/views/edit.jspx" />
+    </definition>
+    <definition extends="default" name="new">
+        <put-attribute name="body" value="/WEB-INF/views/edit.jspx" />
+    </definition>
+    <definition extends="default" name="info">
+        <put-attribute name="body" value="/WEB-INF/views/info.jspx" />
+    </definition>
+    <definition extends="default" name="make">
+        <put-attribute name="body" value="/WEB-INF/views/make.jspx" />
+    </definition>
+    <definition extends="default" name="hotel">
+        <put-attribute name="body" value="/WEB-INF/views/hotel.jspx" />
+    </definition>
+    <definition extends="default" name="sec_registry">
+        <put-attribute name="body" value="/WEB-INF/views/info.jspx" />
+    </definition>
+</tiles-definitions>

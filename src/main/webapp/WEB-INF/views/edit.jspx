@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+<div xmlns:jsp="http://java.sun.com/JSP/Page"
+     xmlns:c="http://java.sun.com/jsp/jstl/core"
+     xmlns:spring="http://www.springframework.org/tags"
+     xmlns:form="http://www.springframework.org/tags/form"
+     version="2.0">
+
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+
+    <spring:message code="room_new_title" var="roomNewTitle"/>
+    <spring:message code="room_edit_title" var="roomEditTitle"/>
+    <spring:message code="room_number_label" var="roomNumberLabel"/>
+    <spring:message code="room_type_label" var="roomTypeLabel"/>
+    <spring:message code="room_direction_label" var="roomDirectionLabel"/>
+    <spring:message code="save_label" var="saveLabel"/>
+    <spring:message code="reset_label" var="resetLabel"/>
+
+    <spring:eval expression="room.id == null ? roomNewTitle : roomEditTitle"
+                 var="roomFormTitle"/>
+
+    <div id="room_edit">
+        <h2>${roomFormTitle}</h2>
+
+        <form:form modelAttribute="room" id="roomEditForm" method="post">
+
+            <c:if test="${not empty message}">
+                <div id="message" class="${message.type}">${message.message}</div>
+            </c:if>
+
+            <form:label path="number">
+                ${roomNumberLabel}*
+            </form:label>
+            <form:input path="number" />
+            <form:errors path="number" cssClass="error" />
+            <p/>
+
+            <form:label path="type">
+                ${roomTypeLabel}*
+            </form:label>
+            <!--<form:input path="type" />-->
+            <form:select path="type" items="${types}"/>
+            <form:errors path="type" cssClass="error" />
+            <p/>
+
+            <form:label path="direction">
+                ${roomDirectionLabel}*
+            </form:label>
+            <!--<form:input path="direction" />-->
+            <form:select path="direction" items="${directions}"/>
+            <form:errors path="direction" cssClass="error" />
+            <p/>
+
+            <form:hidden path="id" />
+            <form:hidden path="version" />
+
+            <a>
+                <input name="submit" type="submit" value="${saveLabel}"/>
+            </a>
+            <a>
+                <input name="reset" type="reset" value="${resetLabel}"/>
+            </a>
+        </form:form>
+    </div>
+</div>

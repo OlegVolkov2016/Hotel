@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div id="menu" xmlns:jsp="http://java.sun.com/JSP/Page"
+     xmlns:c="http://java.sun.com/jsp/jstl/core"
+     xmlns:spring="http://www.springframework.org/tags"
+     xmlns:sec="http://www.springframework.org/security/tags"
+     xmlns:joda="http://www.joda.org/joda/time/tags"
+     version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8" />
+    <jsp:output omit-xml-declaration="yes" />
+
+    <spring:message code="authorization_title" var="autorizationTitle"/>
+    <spring:message code="login_label" var="loginLabel"/>
+    <spring:message code="password_label" var="passwordLabel"/>
+    <spring:message code="login_button" var="loginButton"/>
+    <spring:message code="registration_button" var="registrationButton"/>
+    <spring:url var="loginUrl" value="/sec_check" />
+    <spring:url var="registrationUrl" value="/sec_registry" />
+    <spring:message code="logout_label" var="logoutLabel"/>
+    <spring:message code="info_label" var="infoLabel"/>
+    <spring:url var="logoutUrl" value="/logout" />
+    <spring:url var="infoUrl" value="/info" />
+    <spring:url var="roomNewUrl" value="/new" />
+    <spring:url value="/" var="homeUrl"/>
+    <spring:url var="reservationUrl" value="?res" />
+
+    <spring:message code="main_menu_title" var="mainMenuTitle"/>
+    <spring:message code="user_info_title" var="userInfoTitle"/>
+    <spring:message code="user_firstname_label" var="userFirstNameLabel"/>
+    <spring:message code="user_lastname_label" var="userLastNameLabel"/>
+    <spring:message code="user_role_label" var="userRoleLabel"/>
+
+    <spring:message code="guestrooms_title" var="guestRoomsTitle"/>
+    <spring:message code="guests_title" var="guestRoomsTitle"/>
+    <spring:message code="room_number_label" var="roomNumberLabel"/>
+    <spring:message code="room_type_label" var="roomTypeLabel"/>
+    <spring:message code="room_from_label" var="roomFromLabel"/>
+    <spring:message code="room_to_label" var="roomToLabel"/>
+    <spring:message code="room_new_label" var="roomNewLabel"/>
+
+    <spring:message code="date_format_pattern" var="dateFormatPattern"/>
+
+    <p/>
+    <h3>${mainMenuTitle}</h3>
+
+    <sec:authorize access="isAnonymous()">
+        <div id="login">
+
+            <h2>${autorizationTitle}</h2>
+
+            <form name="loginForm" action="${loginUrl}" method="post">
+                <table>
+                    <tr>
+                        <td>${loginLabel}</td>
+                        <td><input type="text" name="sec_username"/></td>
+                    </tr>
+                    <tr>
+                        <td>${passwordLabel}</td>
+                        <td><input type="password" name="sec_password"/></td>
+                    </tr>
+                </table>
+                <a>
+                    <input name="submit" type="submit" value="${loginButton}"/>
+                </a>
+                <a href="${registrationUrl}">
+                    <input name="registration" type="button" value="${registrationButton}"/>
+                </a>
+                <c:if test="${not empty message}">
+                    <div id="message" class="${message.type}">${message.message}</div>
+                </c:if>
+            </form>
+        </div>
+    </sec:authorize>
+
+    <sec:authorize access="isAuthenticated()">
+        <div id="user_info">
+
+            <h2>${userInfoTitle}</h2>
+
+            <table>
+                <tr>
+                    <td>${loginLabel}</td>
+                    <td>${guest.login}</td>
+                </tr>
+                <tr>
+                    <td>${userFirstNameLabel}</td>
+                    <td>${guest.firstName}</td>
+                </tr>
+                <tr>
+                    <td>${userLastNameLabel}</td>
+                    <td>${guest.lastName}</td>
+                </tr>
+                <tr>
+                    <td>${userRoleLabel}</td>
+                    <td>${guest.role}</td>
+                </tr>
+            </table>
+            <br></br>
+
+            <h2>${guestRoomsTitle}</h2>
+            <table class="scroll">
+                <thead>
+                    <th>${roomNumberLabel}</th>
+                    <th>${roomFromLabel}</th>
+                    <th>${roomToLabel}</th>
+                    <th>X</th>
+                </thead>
+                <tbody>
+                    <c:forEach items="${guest.reservations}" var="reservation">
+                        <tr>
+                            <td><a href="${homeUrl}${reservation.id}${reservationUrl}">${reservation.room.number}</a></td>
+                            <td><joda:format value= "${reservation.from}" pattern="${dateFormatPattern}"/></td>
+                            <td><joda:format value= "${reservation.to}" pattern="${dateFormatPattern}"/></td>
+                            <c:choose>
+                                <c:when test="${reservation.cancelled}">
+                                    <td><input type="checkbox" checked="checked" disabled="disabled"/></td>
+                                </c:when>
+                                <c:otherwise>
+                                    <td><input type="checkbox" disabled="disabled"/></td>
+                                </c:otherwise>
+                            </c:choose>
+                        </tr>
+                    </c:forEach>
+                </tbody>
+                </table>
+            <a href="${logoutUrl}">
+                <input name="logout" type="button" value="${logoutLabel}"/>
+            </a>
+            <a href="${infoUrl}">
+                <input name="info" type="button" value="${infoLabel}"/>
+            </a>
+            <sec:authorize access="hasRole('ROLE_ADMIN')">
+                <a href="${roomNewUrl}">
+                    <input name="new" type="button" value="${roomNewLabel}"/>
+                </a>
+            </sec:authorize>
+
+
+        </div>
+    </sec:authorize>
+
+</div>

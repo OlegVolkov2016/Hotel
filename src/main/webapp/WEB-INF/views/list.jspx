@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page"
+     xmlns:c="http://java.sun.com/jsp/jstl/core"
+     xmlns:spring="http://www.springframework.org/tags" xmlns:form="http://www.springframework.org/tags/form"
+     version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+
+    <spring:message code="allrooms_title" var="allRoomsTitle"/>
+    <spring:message code="room_search_label" var="roomSearchLabel"/>
+    <spring:message code="room_number_label" var="roomNumberLabel"/>
+    <spring:message code="room_type_label" var="roomTypeLabel"/>
+    <spring:message code="room_direction_label" var="roomDirectionLabel"/>
+    <spring:message code="search_label" var="searchLabel"/>
+    <spring:url value="/" var="homeUrl"/>
+
+    <div id="room_list">
+
+        <h2>${allRoomsTitle}</h2>
+
+        <form:form modelAttribute="search" id="searchForm" method="post">
+            <table>
+                <caption>${roomSearchLabel}</caption>
+                <thead>
+                    <th>${roomNumberLabel}</th>
+                    <th>${roomTypeLabel}</th>
+                    <th>${roomDirectionLabel}</th>
+                    <th></th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><form:input path="number" /></td>
+                        <!--<td><form:input path="type" /></td>-->
+                        <td><form:select path="type" items="${types}"/></td>
+                        <!--<td><form:input path="direction" /></td>-->
+                        <td><form:select path="direction" items="${directions}"/></td>
+                        <td>
+                            <a>
+                                <input name="search" type="submit" value="${searchLabel}"/>
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </form:form>
+
+        <p/>
+
+        <table>
+            <caption>${allRoomsTitle}</caption>
+            <thead>
+            <th>${roomNumberLabel}</th>
+            <th>${roomTypeLabel}</th>
+            <th>${roomDirectionLabel}</th>
+        </thead>
+            <tbody>
+            <c:forEach items="${rooms}" var="room">
+                <tr>
+                    <td><a href="${homeUrl}${room.id.toString()}">${room.number}</a></td>
+                    <td>${room.type}</td>
+                    <td>${room.direction}</td>
+                </tr>
+            </c:forEach>
+            </tbody>
+        </table>
+    </div>
+</div>

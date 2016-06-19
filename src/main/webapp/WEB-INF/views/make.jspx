@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+<div xmlns:jsp="http://java.sun.com/JSP/Page"
+     xmlns:c="http://java.sun.com/jsp/jstl/core"
+     xmlns:spring="http://www.springframework.org/tags"
+     xmlns:form="http://www.springframework.org/tags/form"
+     version="2.0">
+
+    <script type="text/javascript">
+        $(function(){
+            $('#from').datepicker({
+                dateFormat: 'dd-mm-yy',
+                changeYear: true,
+                defaultDate: 0
+            });
+        });
+        $(function(){
+            $('#to').datepicker({
+                dateFormat: 'dd-mm-yy',
+                changeYear: true,
+                defaultDate: 1
+            });
+        });
+    </script>
+
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+
+    <spring:message code="room_add_title" var="roomAddTitle"/>
+    <spring:message code="room_change_title" var="roomChangeTitle"/>
+    <spring:message code="room_number_label" var="roomNumberLabel"/>
+    <spring:message code="room_from_label" var="roomFromLabel"/>
+    <spring:message code="room_to_label" var="roomToLabel"/>
+    <spring:message code="room_cancel_label" var="roomCancelLabel"/>
+    <spring:message code="save_label" var="saveLabel"/>
+    <spring:message code="reset_label" var="resetLabel"/>
+
+    <spring:eval expression="reservation.id == null ? roomAddTitle : roomChangeTitle"
+                 var="roomFormTitle"/>
+
+    <div id="reservation_edit">
+        <h2>${roomFormTitle}</h2>
+
+        <form:form modelAttribute="reservation" id="reservationEditForm" method="post">
+
+            <c:if test="${not empty message}">
+                <div id="message" class="${message.type}">${message.message}</div>
+            </c:if>
+
+            <form:label path="room.number">
+                ${roomNumberLabel}*
+            </form:label>
+            <form:input path="room.number" disabled="true" />
+            <form:errors path="room.number" cssClass="error" />
+            <p/>
+
+            <form:label path="from">
+                ${roomFromLabel}*
+            </form:label>
+            <form:input path="from" id="from" />
+            <form:errors path="from" cssClass="error" />
+            <p/>
+
+            <form:label path="to">
+                ${roomToLabel}*
+            </form:label>
+            <form:input path="to" id="to" />
+            <form:errors path="to" cssClass="error" />
+            <p/>
+
+            <c:choose>
+                <c:when test="${reservation.id== null}">
+                    <form:label path="cancelled" >
+                        ${roomCancelLabel}*
+                    </form:label>
+                    <form:checkbox path="cancelled" disabled="true" />
+                    <form:errors path="cancelled" cssClass="error" />
+                </c:when>
+                <c:otherwise>
+                    <form:label path="cancelled">
+                        ${roomCancelLabel}*
+                    </form:label>
+                    <form:checkbox path="cancelled" disabled="false" />
+                    <form:errors path="cancelled" cssClass="error" />
+                </c:otherwise>
+            </c:choose>
+            <p/>
+
+            <form:hidden path="id" />
+            <form:hidden path="version" />
+
+            <a>
+                <input name="submit" type="submit" value="${saveLabel}"/>
+            </a>
+            <a>
+                <input name="reset" type="reset" value="${resetLabel}"/>
+            </a>
+        </form:form>
+    </div>
+</div>

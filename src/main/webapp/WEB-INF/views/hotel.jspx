@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+<div xmlns:jsp="http://java.sun.com/JSP/Page"
+     xmlns:c="http://java.sun.com/jsp/jstl/core"
+     xmlns:spring="http://www.springframework.org/tags"
+     xmlns:form="http://www.springframework.org/tags/form" xmlns:sec="http://www.springframework.org/security/tags"
+     version="2.0">
+
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+
+    <spring:message code="hotel_info_title" var="hotelInfoTitle"/>
+    <spring:message code="hotel_name_label" var="hotelNameLabel"/>
+    <spring:message code="hotel_address_label" var="hotelAddressLabel"/>
+    <spring:message code="hotel_city_label" var="hotelCityLabel"/>
+    <spring:message code="hotel_zip_label" var="hotelZipLabel"/>
+    <spring:message code="hotel_state_label" var="hotelStateLabel"/>
+    <spring:message code="save_label" var="saveLabel"/>
+    <spring:message code="reset_label" var="resetLabel"/>
+
+    <div id="hotel_info">
+        <h2>${hotelInfoTitle}</h2>
+
+        <form:form modelAttribute="hotel" id="hotelInfoForm" method="post">
+
+            <c:if test="${not empty message}">
+                <div id="message" class="${message.type}">${message.message}</div>
+            </c:if>
+
+            <form:label path="name">
+                ${hotelNameLabel}*
+            </form:label>
+            <form:input path="name" />
+            <form:errors path="name" cssClass="error" />
+            <p/>
+
+            <form:label path="address">
+                ${hotelAddressLabel}*
+            </form:label>
+            <form:input path="address" />
+            <form:errors path="address" cssClass="error" />
+            <p/>
+
+            <form:label path="city">
+                ${hotelCityLabel}*
+            </form:label>
+            <form:input path="city" />
+            <form:errors path="city" cssClass="error" />
+            <p/>
+
+            <form:label path="zip">
+                ${hotelZipLabel}*
+            </form:label>
+            <form:input path="zip" />
+            <form:errors path="zip" cssClass="error" />
+            <p/>
+
+            <form:label path="state">
+                ${hotelStateLabel}*
+            </form:label>
+            <form:input path="state" />
+            <form:errors path="state" cssClass="error" />
+            <p/>
+
+            <form:hidden path="id" />
+            <form:hidden path="version" />
+
+            <a>
+                <input name="submit" type="submit" value="${saveLabel}"/>
+            </a>
+            <a>
+                <input name="reset" type="reset" value="${resetLabel}"/>
+            </a>
+        </form:form>
+    </div>
+</div>

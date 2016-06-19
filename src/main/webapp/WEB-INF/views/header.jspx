@@ -1,0 +1,50 @@
+<div id="header" xmlns:jsp="http://java.sun.com/JSP/Page"
+     xmlns:spring="http://www.springframework.org/tags"
+     xmlns:sec="http://www.springframework.org/security/tags"
+     xmlns:c="http://java.sun.com/jsp/jstl/core"
+     version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8" />
+    <jsp:output omit-xml-declaration="yes" />
+
+    <spring:message code="banner_text" var="bannerText"/>
+    <spring:message code="header_text" arguments="${hotel.name}" var="headerText"/>
+    <spring:message code="location_label" var="locationLabel"/>
+    <spring:url var="locationUrl" value="/location" />
+
+    <div id="banner">
+        <h1>${bannerText}</h1>
+    </div>
+
+    <div id="appname">
+        <h2>${headerText}</h2>
+    </div>
+
+    <spring:message code="home_label" var="homeLabel"/>
+    <spring:message code="en_US_label" var="enUSLabel"/>
+    <spring:message code="uk_UK_label" var="ukUKLabel"/>
+    <spring:url value="/home" var="homeUrl"/>
+
+    <div id="language">
+        <a href="${homeUrl}">${homeLabel}</a> |
+        <a href="${homeUrl}?lang=en_US">${enUSLabel}</a> |
+        <a href="${homeUrl}?lang=uk_UK">${ukUKLabel}</a>
+    </div>
+
+    <div id="fulladdress">
+        <h3>
+            <t></t>${hotel.address}, ${hotel.city}
+            ${hotel.zip}, ${hotel.state}
+        </h3>
+    </div>
+
+    <br/>
+    <br/>
+
+    <sec:authorize access="hasRole('ROLE_ADMIN')">
+        <t></t>
+        <a href="${locationUrl}">
+           <input name="edit" type="button" value="${locationLabel}"/>
+        </a>
+    </sec:authorize>
+
+</div>

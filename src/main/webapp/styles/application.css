@@ -1,0 +1,456 @@
+@import url("messages/messages.css");
+
+/* main elements */
+
+body,div,td {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    color: #666;
+}
+
+body {
+    background-color: #fff;
+    text-align: center;
+}
+
+#ui-datepicker-div {
+    width:300px;
+    max-width: 300px;
+}
+
+#header {
+    margin-bottom: 1em;
+}
+
+#appname {
+    float: left;
+    margin: 5;
+    padding: 5px 0px;
+    font-size: 150%;
+    vertical-align: middle;
+}
+
+#banner {
+    float: left;
+    margin: 5;
+    padding: 5px 10px;
+    font-size: 150%;
+    vertical-align: middle;
+}
+
+#fulladdress {
+    float: left;
+    margin: 15;
+    padding: 5px 10px;
+    font-size: 150%;
+    vertical-align: middle;
+}
+
+#userinfo {
+    float: right;
+    margin: 5;
+    padding: 5px 5px;
+}
+
+#language {
+    float: right;
+    margin: 5;
+    padding: 5px 5px;
+}
+
+#headerWrapper {
+    width:950px;
+    min-width: 950px;
+    max-width: 950px;
+    margin-right: auto;
+    margin-left: auto;
+
+    /* fix max-width incompatibility in IE6 */
+    width:expression(document.body.clientWidth > 950? "950px": "auto" );
+
+    overflow:hidden;
+    display:block;
+}
+
+#wrapper {
+    width:950px;
+    min-width: 950px;
+    max-width: 950px;
+    margin-right: auto;
+    margin-left: auto;
+
+    /* fix max-width incompatibility in IE6 */
+    width:expression(document.body.clientWidth > 950? "950px": "auto" );
+
+    overflow:hidden;
+    display:block;
+}
+
+/* header and footer elements */
+
+#main {
+    overflow:hidden;
+    display:box;
+}
+
+#menu {
+    background: #eee;
+    position:relative;
+    float:left;
+    left:0px;
+    min-width:200px;
+    margin-right:15px;
+}
+
+#menu ul{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+#menu ul li{
+    padding: 0px;
+}
+
+
+#menu a, #menu h2 {
+    margin: 0;
+    padding: 2px 6px;
+    color:#FFFFFF;
+}
+
+#menu h2 {
+    display: block;
+    color: #fff;
+    background: #648C1D;
+    text-transform: uppercase;
+    font-weight:bold;
+    font-size: 12px;
+}
+
+#menu a, #main a {
+    color: #666666;
+    padding: 2px 12px;
+}
+
+#menu a:hover, #main a:hover {
+    color: #648C1D;
+}
+
+#books {
+    height: 200px;
+    overflow: auto;
+}
+
+#footer {
+    background:#fff;
+    border:none;
+    margin-top:15px;
+    border-top:1px solid #999999;
+}
+
+#footer .new {
+    float:left;
+}
+
+#footer a:link {color: #7db223;}
+
+#scroll_table {
+    max-height: 100px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.quicklinks {
+    clear:both;
+    padding-bottom: 15px
+}
+.quicklinks span {
+    float: right;
+}
+
+table.navigation {
+    border: 0px;
+}
+
+label {
+    width:150px;
+    float:left;
+    margin-left: 5px;
+    margin-top: 5px;
+}
+
+input {
+    height:20px;
+}
+
+input, textarea, select {
+    border:1px solid #B3B3B3;
+}
+
+input.image {
+    border: none;
+    height: auto;
+    vertical-align: middle;
+}
+
+submit {
+    height:25px;
+}
+
+div {
+    text-align: left;
+}
+
+div .box {
+    display:block;
+    margin-left:105px;
+}
+
+/* menu elements*/
+
+a.menu, a.menu:link, a.menu:visited {display:block; width:150px; height:25px;}
+
+/* text styles */
+
+h1,h2,h3 {
+    font-family: Helvetica, sans-serif;
+
+}
+
+h1 {
+    font-size: 24px;
+    line-height: 26px;
+    color: #660066;
+    font-family: Times New Roman, Arial, Helvetica, sans-serif;
+    font-style: oblique;
+}
+
+h2 {
+    font-size: 18px;
+    line-height: 26px;
+    color: #7db223;
+}
+
+h3 {
+    font-size: 15px;
+    line-height: 21px;
+    color:#555;
+}
+
+h4 {
+    font-size: 14px;
+    line-height: 20px;
+}
+
+.error {
+    color: red;
+    font-weight: bold;
+    padding: 1px 6px;
+    /*display: block;*/
+}
+
+a {
+    text-decoration: underline;
+    font-size: 12px;
+}
+
+a img {
+    border: 0 none;
+    vertical-align: middle;
+}
+
+tr:nth-child(odd) {
+    background-color: #FFFFFF;
+}
+
+tr:nth-child(even) {
+    background-color: #EFEFEF;
+}
+
+a:link {
+    color: #7db223;
+}
+
+a:hover {
+    color: #456314;
+}
+
+a:active {
+    color: #7db223;
+}
+
+a:visited {
+    color: #7db223;
+}
+
+li {
+    padding-top: 5px;
+    text-align: left;
+}
+
+ul li {
+    margin:0 0 0.25em 0;
+    padding:0;
+}
+/* table elements */
+
+table {
+    background: #EEEEEE;
+    margin: 2px 0 0 0;
+    border: 1px solid #BBBBBB;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+table table {
+    margin: -5px 0;
+    border: 0px solid #e0e7d3;
+    width: 100%;
+}
+
+table td,table th {
+    padding: 2px;
+    border: 1px solid #CCCCCC;
+    width:100px;
+}
+
+table td form {
+    text-align:center;
+    vertical-align: middle;
+    margin: 0px;
+}
+
+table th {
+    font-size: 0.9em;
+    text-align: left;
+    font-weight: bold;
+    color: #FFF;
+    background: #999;
+}
+
+table thead {
+    font-weight: bold;
+    font-style: italic;
+    background-color: #BBBBBB;
+}
+
+
+table.scroll thead>tr{
+    /*position:relative;*/
+    display:block;
+}
+
+table.scroll tbody {
+    width: 100%;
+    min-height: 100px;
+    overflow-y: scroll;
+    display:block;
+}
+
+table a:link {color: #303030;}
+
+.utilbox {width: 18px;}
+
+caption {
+    caption-side: top;
+    width: auto;
+    text-align: center;
+    font-size: 12px;
+    color: #848f73;
+    padding-bottom: 4px;
+}
+
+fieldset {
+    background: #e0e7d3;
+    padding: 8px;
+    padding-bottom: 22px;
+    border: none;
+    width: 560px;
+}
+
+fieldset label {
+    width: 70px;
+    float: left;
+    margin-top: 1.7em;
+    margin-left: 20px;
+}
+
+fieldset textfield {
+    margin: 3px;
+    height: 20px;
+    background: #e0e7d3;
+}
+
+fieldset textarea {
+    margin: 3px;
+    height: 165px;
+    background: #e0e7d3;
+}
+
+fieldset input {
+    margin: 3px;
+    height: 20px;
+    background: #e0e7d3;
+}
+
+fieldset table {
+    width: 100%;
+}
+
+fieldset th {
+    padding-left: 25px;
+}
+
+.table-buttons {
+    background-color:#fff;
+    border:none;
+}
+
+.table-buttons td {
+    border:none;
+}
+
+.submit input {
+    border: 1px solid #BBBBBB;
+    color:#777777;
+    padding:2px 7px;
+    font-size:11px;
+    text-transform:uppercase;
+    font-weight:bold;
+    height:24px;
+}
+
+.updated {
+    background:#ecf1e5;
+    font-size:11px;
+    margin-left:2px;
+    border:4px solid #ecf1e5;
+}
+
+.updated td {
+    padding:2px 8px;
+    font-size:11px;
+    color:#888888;
+}
+
+.dijitArrowButton {
+    height: 20px;
+}
+
+.dijitTextArea{
+    min-height:5.5em !important;
+    max-height:22em !important;
+    overflow-y: auto !important;
+    max-width: 175px;
+}
+
+.RichTextEditable{
+    min-height:18em !important;
+    max-height:18em !important;
+}
+
+.flag {
+    height: 11px;
+    width: 16px;
+}
