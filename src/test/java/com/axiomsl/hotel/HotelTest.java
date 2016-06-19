@@ -130,6 +130,9 @@ public class HotelTest {
     @Test
     public void testLocationPost() throws Exception {
         hotel = hotelService.findOne(1L);
+        if (hotelService.findByName("test") != null) {
+            hotelService.delete(hotelService.findByName("test").getId());
+        }
         mockMvc.perform(post("/location")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .sessionAttr("hotel", new HotelBuilder().build())
@@ -178,6 +181,9 @@ public class HotelTest {
 
     @Test
     public void testRegisterPost() throws Exception {
+        if (guestService.findByLogin(guest.getLogin()) != null) {
+            guestService.delete(guestService.findByLogin(guest.getLogin()).getId());
+        }
         mockMvc.perform(post("/sec_registry")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .sessionAttr("guest", new GuestBuilder().build())
@@ -281,6 +287,9 @@ public class HotelTest {
 
     @Test
     public void testRegisterInfo() throws Exception {
+        if (guestService.findByLogin(guest.getLogin()) != null) {
+            guestService.delete(guestService.findByLogin(guest.getLogin()).getId());
+        }
         mockMvc.perform(post("/sec_registry")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .sessionAttr("guest", new GuestBuilder().build())
@@ -322,6 +331,9 @@ public class HotelTest {
 
     @Test
     public void testRoomPost() throws Exception {
+        if (roomService.findByNumber(room.getNumber()) != null) {
+            roomService.delete(roomService.findByNumber(room.getNumber()).getId());
+        }
         mockMvc.perform(get("/"));
         mockMvc.perform(post("/new")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
@@ -352,6 +364,9 @@ public class HotelTest {
 
     @Test
     public void testRoomShow() throws Exception {
+        if (roomService.findByNumber(room.getNumber()) != null) {
+            roomService.delete(roomService.findByNumber(room.getNumber()).getId());
+        }
         hotel = hotelService.findOne(1L);
         mockMvc.perform(get("/"));
         mockMvc.perform(post("/new")
@@ -376,6 +391,9 @@ public class HotelTest {
 
     @Test
     public void testRoomEdit() throws Exception {
+        if (roomService.findByNumber(room.getNumber()) != null) {
+            roomService.delete(roomService.findByNumber(room.getNumber()).getId());
+        }
         hotel = hotelService.findOne(1L);
         mockMvc.perform(get("/"));
         mockMvc.perform(post("/new")
@@ -401,6 +419,9 @@ public class HotelTest {
 
     @Test
     public void testRoomDelete() throws Exception {
+        if (roomService.findByNumber(room.getNumber()) != null) {
+            roomService.delete(roomService.findByNumber(room.getNumber()).getId());
+        }
         hotel = hotelService.findOne(1L);
         mockMvc.perform(get("/"));
         mockMvc.perform(post("/new")
@@ -450,9 +471,6 @@ public class HotelTest {
                 .andExpect(status().isFound())
                 .andExpect(view().name("redirect:/"))
                 .andExpect(forwardedUrl(null));
-        for (Reservation reservationToDelete : reservationService.findAllByGuestAndRoom(guest, room)) {
-            reservationService.delete(reservationToDelete.getId());
-        }
         destroyReservation();
     }
 
@@ -472,9 +490,6 @@ public class HotelTest {
                 .andExpect(view().name("make"))
                 .andExpect(forwardedUrl("/WEB-INF/layouts/default.jspx"))
                 .andExpect(model().attributeHasFieldErrors("reservation", "from"));
-        for (Reservation reservationToDelete : reservationService.findAllByGuestAndRoom(guest, room)) {
-            reservationService.delete(reservationToDelete.getId());
-        }
         destroyReservation();
     }
 
@@ -494,9 +509,6 @@ public class HotelTest {
                 .andExpect(view().name("make"))
                 .andExpect(forwardedUrl("/WEB-INF/layouts/default.jspx"))
                 .andExpect(model().attributeHasFieldErrors("reservation", "to"));
-        for (Reservation reservationToDelete : reservationService.findAllByGuestAndRoom(guest, room)) {
-            reservationService.delete(reservationToDelete.getId());
-        }
         destroyReservation();
     }
 
@@ -515,9 +527,6 @@ public class HotelTest {
                 .andExpect(status().isOk())
                 .andExpect(view().name("make"))
                 .andExpect(forwardedUrl("/WEB-INF/layouts/default.jspx"));
-        for (Reservation reservationToDelete : reservationService.findAllByGuestAndRoom(guest, room)) {
-            reservationService.delete(reservationToDelete.getId());
-        }
         destroyReservation();
     }
 
@@ -545,9 +554,6 @@ public class HotelTest {
                 .andExpect(status().isOk())
                 .andExpect(view().name("make"))
                 .andExpect(forwardedUrl("/WEB-INF/layouts/default.jspx"));
-        for (Reservation reservationToDelete : reservationService.findAllByGuestAndRoom(guest, room)) {
-            reservationService.delete(reservationToDelete.getId());
-        }
         destroyReservation();
     }
 
@@ -575,13 +581,13 @@ public class HotelTest {
                 .andExpect(status().isFound())
                 .andExpect(view().name("redirect:/"))
                 .andExpect(forwardedUrl(null));
-        for (Reservation reservationToDelete : reservationService.findAllByGuestAndRoom(guest, room)) {
-            reservationService.delete(reservationToDelete.getId());
-        }
         destroyReservation();
     }
 
     private void initReservation() throws Exception {
+        if (guestService.findByLogin(guest.getLogin()) != null) {
+            guestService.delete(guestService.findByLogin(guest.getLogin()).getId());
+        }
         mockMvc.perform(post("/sec_registry")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .sessionAttr("guest", new GuestBuilder().build())
@@ -592,6 +598,9 @@ public class HotelTest {
                 .param("firstName", guest.getFirstName())
                 .param("lastName", guest.getLastName()));
         guest = guestService.findByLogin(guest.getLogin());
+        if (roomService.findByNumber(room.getNumber()) != null) {
+            roomService.delete(roomService.findByNumber(room.getNumber()).getId());
+        }
         mockMvc.perform(get("/"));
         mockMvc.perform(post("/new")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
@@ -600,9 +609,15 @@ public class HotelTest {
                 .param("type", room.getType().name())
                 .param("direction", room.getDirection().name()));
         room = roomService.findByNumber(room.getNumber());
+        for (Reservation reservationToDelete : reservationService.findAllByGuestAndRoom(guest, room)) {
+            reservationService.delete(reservationToDelete.getId());
+        }
     }
 
     private void destroyReservation() {
+        for (Reservation reservationToDelete : reservationService.findAllByGuestAndRoom(guest, room)) {
+            reservationService.delete(reservationToDelete.getId());
+        }
         roomService.delete(room.getId());
         SecurityContextHolder.getContext().setAuthentication(null);
         guestService.delete(guest.getId());
